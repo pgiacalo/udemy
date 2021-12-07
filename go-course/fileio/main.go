@@ -8,10 +8,11 @@ import (
 
 func printUsage() {
 	fmt.Println("Usage: go run main.go <read> <file_path>")
-	fmt.Println("Usage: go run main.go <write> <file_path> [contents] [append bool]")
+	fmt.Println("Usage: go run main.go <write> <file_path> <contents> [append bool]")
+	fmt.Println("example: go run main.go write ./out.txt \"hello world\" true")
 }
 
-func writeToFile(filePath string, contents string, append bool, perm os.FileMode) error {
+func WriteToFile(filePath string, contents string, append bool, perm os.FileMode) error {
 	if !append {
 		return ioutil.WriteFile(filePath, []byte(contents+"\n"), perm)
 	}
@@ -61,7 +62,7 @@ func main() {
 			append = false
 		}
 		file := args[2]
-		err := writeToFile(file, args[3], append, 0644)
+		err := WriteToFile(file, args[3], append, 0644)
 		if err != nil {
 			fmt.Println("Error during write attempt:", err)
 			os.Exit(1)
