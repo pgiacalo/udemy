@@ -34,17 +34,13 @@ func WriteToFile(filePath string, contents string, append bool, perm os.FileMode
 
 func main() {
 	args := os.Args
-	if len(args) < 2 {
+	if len(args) < 3 {
 		printUsage()
 		os.Exit(1)
 	}
 
 	switch args[1] {
 	case "read":
-		if len(args) < 3 {
-			printUsage()
-			os.Exit(1)
-		}
 		filePath := args[2]
 		b, err := os.ReadFile(filePath)
 		if err != nil {
